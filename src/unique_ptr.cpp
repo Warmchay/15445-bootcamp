@@ -16,7 +16,8 @@
 // std::unique_ptr is a type of smart pointer that retains sole ownership of an
 // object This means that no two instances of std::unique_ptr can manage the
 // same object.
-
+// std::unique_ptr 和 std::shared_ptr 自动进行内存分配和内存释放
+// std::unique_ptr 指定一个 object 仅有一个所有权，不存在两个 instance 管理相同的 obj
 // Includes std::cout (printing) for demo purposes.
 #include <iostream>
 // Includes std::unique_ptr functionality.
@@ -60,6 +61,7 @@ int main() {
   // its objects to a boolean type, and so this function is called whenever we
   // treat the std::unique_ptr as a boolean. For instance, this can be used in
   // the following example.
+  // unique ptr 如果是空在判断时会转换为 boolean 值的 false
   if (u1) {
     // This won't print because u1 is empty.
     std::cout << "u1's value of x is " << u1->GetX() << std::endl;
@@ -79,10 +81,12 @@ int main() {
 
   // Since instances of std::unique_ptr can have only one owner, it has no copy
   // constructor. Therefore, this code won't compile. Uncomment it to try!
+  // unique_ptr 只能有一个 owner，因此没有拷贝构造
   // std::unique_ptr<Point> u4 = u3;
 
   // However, it's possible to transfer ownership of unique pointers via
   // std::move.
+  // 可以通过 move 转移对象所有权
   std::unique_ptr<Point> u4 = std::move(u3);
 
   // Note that because u3 is an lvalue, it no longer contains any managed

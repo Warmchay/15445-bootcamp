@@ -9,7 +9,7 @@
 // std::shared_ptr is a type of smart pointer that retains shared ownership of
 // an object through a pointer. This means that multiple shared pointers can
 // own the same object, and shared pointers can be copied.
-
+// std::shared_ptr 中单个对象可以被多个指针共享
 // Includes std::cout (printing) for demo purposes.
 #include <iostream>
 // Includes std::shared_ptr functionality.
@@ -97,6 +97,7 @@ int main() {
 
   // Modifying s3's data should also change the data in s4 and s5, since they
   // refer to the same object instance.
+  // 修改 s3 的值同时也会更新 s4 和 s5，因为修改的是共享对象
   s3->SetX(445);
 
   std::cout << "Printing x in s3: " << s3->GetX() << std::endl;
@@ -105,6 +106,7 @@ int main() {
 
   // It is also possible to transfer ownership of a std::shared_ptr by moving
   // it. Note that the pointer is empty after the move has occurred.
+  // 由 move 转移所有权，此时 s5 为空，s6 指向共享对象
   std::shared_ptr<Point> s6 = std::move(s5);
 
   // Note that s5 is now empty, s6 refers to the same data as s3 and s4, and
