@@ -9,6 +9,8 @@
 // method of obtaining and releasing locks. This means that when the object
 // is constructed, the locks are acquired, and when the object is destructed,
 // the locks are released.
+// scope_lock 为包装类的 mutex，提供 RAII 的锁获取/释放方法
+// 这意味当一个 obj 被创建时便获取锁，destructed 时释放锁
 
 // Includes std::cout (printing) for demo purposes.
 #include <iostream>
@@ -31,6 +33,7 @@ void add_count() {
 
   // Once the function add_count finishes, the object slk is out of scope, and
   // in its destructor, the mutex m is released.
+  // 当 add_count 结束时，slk 离开当前域便自动释放 mutex
 }
 
 // The main method is identical to the one in mutex.cpp. It constructs the

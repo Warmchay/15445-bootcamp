@@ -57,6 +57,8 @@ void add_count_and_notify() {
 // gives more flexibility and features, including the usage with
 // condition variables. Particularly, it is moveable but not copy-constructible
 // or copy-assignable.
+// waiting thread 持锁直到条件变量达到 lambda 条件
+// 条件变量需要由 unique lock 对象持有，unique lock 可移动构造不可拷贝构造/赋值
 void waiter_thread() {
   std::unique_lock lk(m);
   cv.wait(lk, []{return count == 2;});
