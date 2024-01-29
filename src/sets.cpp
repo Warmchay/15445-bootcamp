@@ -13,6 +13,7 @@
 // unique objects of a single type. It is usually implemented as a Red-Black
 // tree, if that helps you conceptualize the std::set. The std::set container
 // is used to maintain of a set of unique elements.
+// sorted set 内部为红黑树
 
 // There is documentation on all the other functions, and other containers
 // on https://en.cppreference.com/w/cpp/container. You will definitely need this
@@ -85,6 +86,7 @@ int main() {
   // Lastly, we can erase elements in the set by passing in an iterator range to
   // the erase function. For instance, if we want to erase elements that are
   // greater than or equal to 9 (so, 9 and 10), we call the following.
+  // 删除时可以返回迭代器的 first 和 last 的位置，范围删除
   int_set.erase(int_set.find(9), int_set.end());
 
   // We confirm that 9 and 10 aren't in the set anymore.
