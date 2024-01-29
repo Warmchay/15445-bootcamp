@@ -17,6 +17,7 @@
 // template<typename T>. Although these statements are equivalent, there are
 // differences between the class and typename keywords. This blog article covers
 // this difference, but you won't need to know this for the class:
+// template<class T> 和 template<typename T> 有区别，但在 bustub 中功能一样，暂不需要了解
 // https://mariusbancila.ro/blog/2021/03/15/typename-or-class/
 template <typename T> T add(T a, T b) { return a + b; }
 
@@ -34,6 +35,7 @@ void print_two_values(T a, U b) {
 template <typename T> void print_msg() { std::cout << "Hello world!\n"; }
 
 // Specialized templated function, specialized on the float type.
+// 用于 float type 的函数，其他 type 由 print_msg 操作 
 template <> void print_msg<float>() {
   std::cout << "print_msg called with float type!\n";
 }
@@ -59,6 +61,7 @@ int main() {
   // arguments, although if you're a beginner in modern C++, it's preferred you
   // don't do this because then you might not be sure of the types being passed
   // into your functions.
+  // 模板不传参根据数据类型来自动定义
   std::cout << "Printing add(3, 5): " << add(3, 5) << std::endl;
 
   // Second, let's see the print_two_values function being called with two

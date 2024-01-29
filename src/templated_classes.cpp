@@ -69,6 +69,7 @@ class FooSpecial<float> {
 };
 
 // Template parameters don't have to be types. They can also be values!
+// 模板参数不一定是 types，还可以是 values
 template<int T>
 class Bar {
   public: 
@@ -91,6 +92,7 @@ int main() {
   // of its arguments. Once again, if you're a beginner, think twice
   // before doing this if you are unsure of the types you are 
   // instantiating your class with.
+  // 模板类可以翻译形参的 type，需要注意编写时确定是需要的类型
   Foo b(3.4f);
   std::cout << "Calling print on Foo b(3.4f): ";
   b.print();
