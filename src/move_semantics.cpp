@@ -8,17 +8,17 @@
 // and optimized transfer of ownership of data between objects. One of the
 // main goals of move semantics is to increase performance, since moving an
 // object is faster and more efficient than deep copying the object.
-
+// 移动 obj 比深拷贝要高效
 // To understand move semantics, one must understand the concept of lvalues
 // and rvalues. A simplified definition of lvalues is that lvalues are objects
 // that refer to a location in memory. Rvalues are anything that is not a
 // lvalue.
-
+// 左值为 obj 在 memory 的位置，右值可以是除了左值外任意值
 // std::move is the most common way of moving an object from one lvalue to
 // another. std::move casts an expression to a rvalue. This allows for us to
 // interact with a lvalue as a rvalue, and allows for the ownership to be
 // transferred from one lvalue to another.
-
+// std::move 将左值转为右值，能将左值的所有权转交给另一个对象
 // In the code below, we include some examples for identifying whether
 // expressions in C++ are lvalues or rvalues, how to use std::move, and passing
 // rvalues references into functions.
@@ -37,6 +37,7 @@
 // Function that takes in a rvalue reference as an argument.
 // It seizes ownership of the vector passed in, appends 3 to
 // the back of it, and prints the values in the vector.
+// 传参为右值，将 vec 所有权交给 vec1，填充 3
 void move_add_three_and_print(std::vector<int> &&vec) {
   std::vector<int> vec1 = std::move(vec);
   vec1.push_back(3);
@@ -62,6 +63,7 @@ void add_three_and_print(std::vector<int> &&vec) {
 int main() {
   // Take this expression. Note that 'a' is a lvalue, since it's a variable that
   // refers to a specific space in memory (where 'a' is stored). 10 is a rvalue.
+  // a 为 lvalve，表示 memory 内具体的位置；10 为 rvalue
   int a = 10;
 
   // Let's see a basic example of moving data from one lvalue to another.
@@ -69,16 +71,19 @@ int main() {
   std::vector<int> int_array = {1, 2, 3, 4};
 
   // Now, we move the values of this array to another lvalue.
+  // lvalue 传递给另一个 lvalve
   std::vector<int> stealing_ints = std::move(int_array);
 
   // Rvalue references are references that refer to the data itself, as opposed
   // to a lvalue. Calling std::move on a lvalue (such as stealing_ints) will
   // result in the expression being cast to a rvalue reference.
+  // std::move 将左值 cast 为右值，交由 rvalue_stealing_ints
   std::vector<int> &&rvalue_stealing_ints = std::move(stealing_ints);
 
   // However, note that after this, it is still possible to access the data in
   // stealing_ints, since that is the lvalue that owns the data, not
   // rvalue_stealing_ints.
+  // 使用 std::move 后，左值依旧有数据的所有权
   std::cout << "Printing from stealing_ints: " << stealing_ints[1] << std::endl;
 
   // It is possible to pass in a rvalue reference into a function. However,
@@ -86,6 +91,7 @@ int main() {
   // in the callee context, it is effectively unusable to the caller.
   // Essentially, after move_add_three_and_print is called, we cannot use the
   // data in int_array2. It no longer belongs to the int_array2 lvalue.
+  // 一旦调用上下文的左值传递给被调用方的左值，该左值（int_array2）便不能使用
   std::vector<int> int_array2 = {1, 2, 3, 4};
   std::cout << "Calling move_add_three_and_print...\n";
   move_add_three_and_print(std::move(int_array2));

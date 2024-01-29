@@ -41,6 +41,7 @@ public:
   // Keep in mind that this constructor takes in a std::vector<std::string>
   // rvalue. This makes the constructor more efficient because it doesn't deep
   // copy the vector instance when constructing the person object.
+  // 构造函数内使用右值作为形参，可以减少深拷贝的开销
   Person(uint32_t age, std::vector<std::string> &&nicknames)
       : age_(age), nicknames_(std::move(nicknames)), valid_(true) {}
 
@@ -139,6 +140,7 @@ int main() {
   // default constructor, and the second line invokes the copy assignment operator
   // to re-initialize andy3 with the deep-copied contents of andy2. Try uncommenting
   // these lines of code to see the resulting compiler errors.
+  // 构造函数仅进行了移动构造，拷贝相关操作不得运行
   // Person andy3;
   // andy3 = andy2;
 

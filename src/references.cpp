@@ -20,7 +20,8 @@ int main() {
   // Take this expression. Note that b has type int& (int reference),
   // since it is a reference to a. This means that a and b both refer to the
   // same data. You can declare references by setting your variables type via
-  // the single ampersand syntax.
+  // the single ampersand（&） syntax.
+  // 引用 & 共享内存的数据
   int a = 10;
   int &b = a;
 
