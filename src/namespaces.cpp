@@ -13,7 +13,7 @@
 // namespace. C++ uses the :: operator for scope resolution, and therefore
 // it is useful in differentiating which namespace a function, type,
 // or class is declared in.
-
+// namespaces 提供 identifiers 的使用域避免命名冲突，以 :: 作范围解析
 // In this file, we will introduce namespaces, namespace syntax, the using
 // keyword, and calling functions from other namespaces.
 
@@ -67,6 +67,7 @@ namespace ABC {
   // namespace) in the uses_DEF_bar function.
   void uses_DEF_bar(float a) {
     std::cout << "Hello from uses_DEF_bar: ";
+    // 使用 nested namespace 的方法
     DEF::bar(a);
   }
 }

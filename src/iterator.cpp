@@ -23,7 +23,7 @@
 // element at the current position of the iterator. The ++ (postfix increment)
 // operator should increment the iterator's position by 1. As you can see, this
 // is true with the pointer being used to iterate through a C style array.
-
+// 解引用（*）返回 iterator 当前指向的元素值，++ 操作增加 iter 的位置
 // There are a few examples about how to use iterators to access elements
 // in C++ STL containers in vectors.cpp, sets.cpp, unordered_maps.cpp, 
 // and auto.cpp. This is because using iterators in C++ to access and modify

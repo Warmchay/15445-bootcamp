@@ -36,6 +36,8 @@
 // Another reason that wrapper classes forbid copying is because they destroy
 // their resource in the destructor, and if two objects are managing the same
 // resource, there is a risk of double deletion of the resource.
+// RAII 中 class 通过指针进行访问
+// Wrapper class 内没有拷贝函数，有移动构造和移动赋值操作符
 class IntPtrManager {
   public:
     // All constructors of a wrapper class are supposed to initialize a resource.
@@ -59,6 +61,7 @@ class IntPtrManager {
       // Note that since the move constructor marks objects invalid by setting
       // their ptr_ value to nullptr, we have to account for this in the 
       // destructor. We don't want to be calling delete on a nullptr!
+      // 释放资源时，应该先判断是否为空指针
       if (ptr_) {
         delete ptr_;
       }
